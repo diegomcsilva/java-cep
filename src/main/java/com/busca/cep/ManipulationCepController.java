@@ -6,8 +6,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.List;
 
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ManipulationCepController {
 
-  @RequestMapping("/")
-  public String GetCep() throws IOException {
+  @RequestMapping("/{cep}")
+  public String GetCep(@PathVariable("cep") long cep) throws IOException {
     // API: https://viacep.com.br/
     // REF: https://stackoverflow.com/questions/1485708/how-do-i-do-a-http-get-in-java
 
     // TODO: receber parametro na rota
-    String urlString = "http://viacep.com.br/ws/22735140/json";
+    String urlString = "http://viacep.com.br/ws/" + cep + "/json";
     URL url = new URL(urlString);
     URLConnection conn = url.openConnection();
     InputStream is = conn.getInputStream();
@@ -39,10 +39,10 @@ public class ManipulationCepController {
             result.append(newLine);
         }
 
-        System.out.println(newLine);
-
         result.append(line);
     }
+    
+    System.out.println("Get a specific with cep=" + cep);
 
     return result.toString();
   }
