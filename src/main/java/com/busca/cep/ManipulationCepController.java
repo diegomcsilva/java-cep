@@ -7,10 +7,12 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 
+import org.json.JSONObject;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.busca.cep.modelos.cepModel;
 
 @RestController
 public class ManipulationCepController {
@@ -27,24 +29,24 @@ public class ManipulationCepController {
     InputStream is = conn.getInputStream();
 
     // REF: https://stackoverflow.com/questions/309424/how-do-i-read-convert-an-inputstream-into-a-string-in-java
-    String newLine = System.getProperty("line.separator");
-
     BufferedReader reader = new BufferedReader(
             new InputStreamReader(is));
+            
     StringBuilder result = new StringBuilder();
 
     // TODO: Mapear o Json para retorno
-    for (String line; (line = reader.readLine()) != null; ) {
-        if (result.length() > 0) {
-            result.append(newLine);
-        }
 
+    for (String line; (line = reader.readLine()) != null; ) {
         result.append(line);
     }
-    
-    System.out.println("Get a specific with cep=" + cep);
 
-    return result.toString();
+    JSONObject json = new JSONObject(result.toString());
+
+    // cepModel cepzinho = new cepModel(json.toString)
+
+    // System.out.println("Get a specific with cep=" + cepzinho);
+
+    return json.toString();
   }
 
 
