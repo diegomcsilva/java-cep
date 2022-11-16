@@ -1,5 +1,7 @@
 package com.busca.cep.modelos;
 
+import org.json.JSONObject;
+
 public class cepModel {
   private String cep;
   private String logradouro;
@@ -12,19 +14,17 @@ public class cepModel {
   private String ddd;
   private String siafi;
 
-  
-  public cepModel(String cep, String logradouro, String complemento, String bairro, String localidade, String uf,
-      String ibge, String gia, String ddd, String siafi) {
-    this.cep = cep;
-    this.logradouro = logradouro;
-    this.complemento = complemento;
-    this.bairro = bairro;
-    this.localidade = localidade;
-    this.uf = uf;
-    this.ibge = ibge;
-    this.gia = gia;
-    this.ddd = ddd;
-    this.siafi = siafi;
+  public cepModel(JSONObject json) {
+    this.cep = (String) json.get("cep");
+    this.logradouro = (String) json.get("logradouro");
+    this.complemento = (String) json.get("complemento");
+    this.bairro = (String) json.get("bairro");
+    this.localidade = (String) json.get("localidade");
+    this.uf = (String) json.get("uf");
+    this.ibge = (String) json.get("ibge");
+    this.gia = (String) json.get("gia");
+    this.ddd = (String) json.get("ddd");
+    this.siafi = (String) json.get("siafi");
   }
 
   public String getCep() {
