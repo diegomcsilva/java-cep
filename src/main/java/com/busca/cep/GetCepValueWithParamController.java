@@ -43,12 +43,36 @@ public class GetCepValueWithParamController {
 
     JSONObject json = new JSONObject(result.toString());
 
-    cepModel cepzinho = new cepModel(json);
+    cepModel cepResult = new cepModel(json);
 
-    LOGGER.info("Get a specific with cep=" + cepzinho.getBairro());
+    LOGGER.info("Get a specific with cep=" + value);
 
-    String bairroName = cepzinho.getBairro();
+    // TODO: Think other format
+    switch(value) {
+      case "uf":
+        return "uf: " + cepResult.getUf();
+
+      case "complemento":
+        return "complemento: " + cepResult.getComplemento();
+
+      case "ddd":
+        return "ddd: " + cepResult.getDdd();
+
+      case "logradouro":
+        return "logradouro: " + cepResult.getLogradouro();
+
+      case "bairro":
+        return "bairro: " + cepResult.getBairro();
+
+      case "localidade":
+        return "localidade: " + cepResult.getLocalidade();
+        
+      case "cep":
+        return "cep: " + cepResult.getCep();
+
+      default:
+        return "Informe um campo válido!";
+    }
     
-    return "Bairro name: " + bairroName;
   }
 }

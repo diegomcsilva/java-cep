@@ -48,10 +48,10 @@ public class GetCepController {
 
     JSONObject json = new JSONObject(result.toString());
 
-    cepModel cepzinho = new cepModel(json);
+    cepModel cepResult = new cepModel(json);
 
     // System.out.println("Get a specific with cep=" + json.get("uf"));
-    LOGGER.info("Get a specific with cep=" + cepzinho.getBairro());
+    LOGGER.info("Get a specific with cep=" + cepResult.getBairro());
 
     return json.toString();
   }
